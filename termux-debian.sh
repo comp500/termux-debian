@@ -27,11 +27,15 @@ echo "nameserver 8.8.8.8" > ~/debian/etc/resolv.conf
 
 echo "0" > ~/debian/fips_enabled
 
+# fix dpkg
+
+touch ~/debian/status-old
+
 # make a shortcut
 
 cat > /data/data/com.termux/files/usr/bin/debian <<- EOM
 #!/data/data/com.termux/files/usr/bin/sh
-proot -0 -r ~/debian -b ~/debian/fips_enabled:/proc/sys/crypto/fips_enabled -b /dev/ -b /sys/ -b /proc/ -b $HOME /usr/bin/env -i HOME=/root TERM="$TERM" PS1='[root@deb \W]\$ ' PATH=/bin:/usr/bin:/sbin:/usr/sbin:/bin /bin/bash --login
+proot -0 -r ~/debian -b ~/debian/fips_enabled:/proc/sys/crypto/fips_enabled -b ~/debian/status-old:/var/lib/dpkg/status-old -b /dev/ -b /sys/ -b /proc/ -b $HOME /usr/bin/env -i HOME=/root TERM="$TERM" PS1='[root@deb \W]\$ ' PATH=/bin:/usr/bin:/sbin:/usr/sbin:/bin /bin/bash --login
 EOM
 
 chmod +x /data/data/com.termux/files/usr/bin/debian

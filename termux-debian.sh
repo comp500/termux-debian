@@ -25,7 +25,7 @@ echo "nameserver 8.8.8.8" > ~/debian/etc/resolv.conf
 
 cat > /data/data/com.termux/files/usr/bin/debian <<- EOM
 #!/data/data/com.termux/files/usr/bin/sh
-proot -0 -r ~/debian -b /dev/ -b /sys/ -b /proc/ -b $HOME /bin/env -i HOME=/root TERM="$TERM" PS1='[root@deb \W]\$ ' PATH=/bin:/usr/bin:/sbin:/usr/sbin:/bin /bin/bash --login
+proot -0 -r ~/debian -b /dev/ -b /sys/ -b /proc/ -b $HOME /usr/bin/env -i HOME=/root TERM="$TERM" PS1='[root@deb \W]\$ ' PATH=/bin:/usr/bin:/sbin:/usr/sbin:/bin /bin/bash --login
 EOM
 
 chmod +x /data/data/com.termux/files/usr/bin/debian

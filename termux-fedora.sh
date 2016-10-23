@@ -6,21 +6,16 @@ apt install proot tar -y
 
 mkdir ~/debian
 cd ~/debian
-/data/data/com.termux/files/usr/bin/wget http://download.fedoraproject.org/pub/fedora/linux/releases/24/Docker/armhfp/images/Fedora-Docker-Base-24-1.2.armhfp.tar.xz
-
-# extract the Docker image
-
-/data/data/com.termux/files/usr/bin/tar xvf Fedora-Docker-Base-24-1.2.armhfp.tar.xz --strip-components=1 --exclude json --exclude VERSION
+/data/data/com.termux/files/usr/bin/wget https://github.com/tianon/docker-brew-debian/raw/5f84ff77365de2ee50655978edad2ba5004c1321/stable/rootfs.tar.xz
 
 # extract the rootfs
 
-/data/data/com.termux/files/usr/bin/tar xpf layer.tar
+/data/data/com.termux/files/usr/bin/tar xvf rootfs.tar.xz
 
 # cleanup
 
 chmod +w .
-rm layer.tar
-rm Fedora-Docker-Base-24-1.2.armhfp.tar.xz
+rm rootfs.tar.xz
 
 # fix DNS
 
@@ -30,7 +25,7 @@ echo "nameserver 8.8.8.8" > ~/debian/etc/resolv.conf
 
 cat > /data/data/com.termux/files/usr/bin/debian <<- EOM
 #!/data/data/com.termux/files/usr/bin/sh
-proot -0 -r ~/fedora -b /dev/ -b /sys/ -b /proc/ -b $HOME /bin/env -i HOME=/root TERM="$TERM" PS1='[root@f24 \W]\$ ' PATH=/bin:/usr/bin:/sbin:/usr/sbin:/bin /bin/bash --login
+proot -0 -r ~/debian -b /dev/ -b /sys/ -b /proc/ -b $HOME /bin/env -i HOME=/root TERM="$TERM" PS1='[root@deb \W]\$ ' PATH=/bin:/usr/bin:/sbin:/usr/sbin:/bin /bin/bash --login
 EOM
 
 chmod +x /data/data/com.termux/files/usr/bin/debian

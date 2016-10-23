@@ -23,11 +23,15 @@ rm ubuntu-yakkety-core-cloudimg-armhf-root.tar.gz
 
 echo "nameserver 8.8.8.8" > ~/debian/etc/resolv.conf
 
+# fix FIPS
+
+echo "0" > ~/debian/fips_enabled
+
 # make a shortcut
 
 cat > /data/data/com.termux/files/usr/bin/debian <<- EOM
 #!/data/data/com.termux/files/usr/bin/sh
-proot -0 -r ~/debian -b /dev/ -b /sys/ -b /proc/ -b $HOME /usr/bin/env -i HOME=/root TERM="$TERM" PS1='[root@deb \W]\$ ' PATH=/bin:/usr/bin:/sbin:/usr/sbin:/bin /bin/bash --login
+proot -0 -r ~/debian -b /proc/sys/crypto/fips_enabled:/fips_enabled -b /dev/ -b /sys/ -b /proc/ -b $HOME /usr/bin/env -i HOME=/root TERM="$TERM" PS1='[root@deb \W]\$ ' PATH=/bin:/usr/bin:/sbin:/usr/sbin:/bin /bin/bash --login
 EOM
 
 chmod +x /data/data/com.termux/files/usr/bin/debian

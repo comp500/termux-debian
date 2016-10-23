@@ -4,8 +4,8 @@ apt install proot tar -y
 
 # get the docker image
 
-mkdir ~/fedora
-cd ~/fedora
+mkdir ~/debian
+cd ~/debian
 /data/data/com.termux/files/usr/bin/wget http://download.fedoraproject.org/pub/fedora/linux/releases/24/Docker/armhfp/images/Fedora-Docker-Base-24-1.2.armhfp.tar.xz
 
 # extract the Docker image
@@ -24,17 +24,17 @@ rm Fedora-Docker-Base-24-1.2.armhfp.tar.xz
 
 # fix DNS
 
-echo "nameserver 8.8.8.8" > ~/fedora/etc/resolv.conf
+echo "nameserver 8.8.8.8" > ~/debian/etc/resolv.conf
 
 # make a shortcut
 
-cat > /data/data/com.termux/files/usr/bin/fedora <<- EOM
+cat > /data/data/com.termux/files/usr/bin/debian <<- EOM
 #!/data/data/com.termux/files/usr/bin/sh
 proot -0 -r ~/fedora -b /dev/ -b /sys/ -b /proc/ -b $HOME /bin/env -i HOME=/root TERM="$TERM" PS1='[root@f24 \W]\$ ' PATH=/bin:/usr/bin:/sbin:/usr/sbin:/bin /bin/bash --login
 EOM
 
-chmod +x /data/data/com.termux/files/usr/bin/fedora
+chmod +x /data/data/com.termux/files/usr/bin/debian
 
 # all done
 
-echo "All done!, start Fedora with 'fedora'"
+echo "All done!, start Debian with 'debian'"

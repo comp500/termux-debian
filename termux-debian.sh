@@ -12,12 +12,12 @@ cd ~/debian
 
 # extract the rootfs
 
-/data/data/com.termux/files/usr/bin/tar xvf ubuntu-yakkety-core-cloudimg-armhf-root.tar.xz
+/data/data/com.termux/files/usr/bin/tar xzvf ubuntu-yakkety-core-cloudimg-armhf-root.tar.gz
 
 # cleanup
 
 chmod +w .
-rm rootfs.tar.xz
+rm ubuntu-yakkety-core-cloudimg-armhf-root.tar.gz
 
 # fix DNS
 

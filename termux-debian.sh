@@ -8,16 +8,16 @@ apt install proot tar -y
 
 mkdir ~/debian
 cd ~/debian
-/data/data/com.termux/files/usr/bin/wget https://partner-images.canonical.com/core/yakkety/current/ubuntu-yakkety-core-cloudimg-armhf-root.tar.gz
+/data/data/com.termux/files/usr/bin/wget https://partner-images.canonical.com/core/xenial/current/ubuntu-xenial-core-cloudimg-armhf-root.tar.gz
 
 # extract the rootfs
 
-/data/data/com.termux/files/usr/bin/tar xzvf ubuntu-yakkety-core-cloudimg-armhf-root.tar.gz
+/data/data/com.termux/files/usr/bin/tar xzvf ubuntu-xenial-core-cloudimg-armhf-root.tar.gz
 
 # cleanup
 
 chmod +w .
-rm ubuntu-yakkety-core-cloudimg-armhf-root.tar.gz
+rm ubuntu-xenial-core-cloudimg-armhf-root.tar.gz
 
 # fix DNS
 
